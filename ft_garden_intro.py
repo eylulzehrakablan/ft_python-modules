@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 plant = "Zehra"
 height = 157
 age = 7902
