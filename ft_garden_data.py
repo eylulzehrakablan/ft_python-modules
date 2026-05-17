@@ -17,11 +17,7 @@ plants = (
 )
 
 
-def ft_garden_data() -> None:
+if __name__ == "__main__":
     print("=== Garden Plant Registry ===")
     for plant in plants:
         plant.show()
-
-
-if __name__ == "__main__":
-    ft_garden_data()
