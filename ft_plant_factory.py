@@ -16,6 +16,7 @@ class Plant:
     def age(self) -> None:
         self.age_in_days += 1
 
+
 plants = [
     Plant("Rose", 25, 30),
     Plant("Oak", 200, 365),
@@ -24,11 +25,13 @@ plants = [
     Plant("Fern", 15, 120)
 ]
 
+
 if __name__ == "__main__":
     print("=== Plant Factory Output ===")
     for plant in plants:
-        print(f"Created: ", end="")
+        print("Created: ", end="")
         plant.show()
+
     # for day in range(1, 8):
     #     for plant in plants:
     #         match plant.name:
