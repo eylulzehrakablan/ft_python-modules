@@ -22,8 +22,8 @@ if __name__ == "__main__":
     initial_height = rose.height
     print("=== Garden Plant Growth ===")
     rose.show()
-    for i in range(1, 8):
-        print(f"=== Day {i} ===")
+    for day in range(1, 8):
+        print(f"=== Day {day} ===")
         rose.grow(0.8)
         rose.show()
     print(f"Growth this week: {(rose.height - initial_height):.1f}cm")
