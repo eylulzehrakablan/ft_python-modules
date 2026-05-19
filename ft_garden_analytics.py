@@ -12,11 +12,11 @@ class Plant:
             self._grow_calls += 1
 
         def count_age(self) -> None:
-            self._age_calls += 1            
+            self._age_calls += 1
 
         def count_show(self) -> None:
             self._show_calls += 1
-        
+
         def count_shade(self) -> None:
             self._shade_calls += 1
 
@@ -52,6 +52,9 @@ class Plant:
     def show(self) -> None:
         print(f"{self._name}: {self._height:.1f}cm, {self._age_in_days} days old")
         self._stats.count_show()
+    
+    def display_stats(self) -> None:
+        display_stats(self)
 
 
 def display_stats(plant: Plant) -> None:
@@ -72,8 +75,9 @@ class Flower(Plant):
         self.is_blooming = False
 
     def bloom(self) -> None:
-        print(f"[asking the {(self._name).lower()} to bloom]")
+        print(f"[asking the {(self._name).lower()} to grow and bloom]")
         self.is_blooming = True
+        self.grow(1)
 
     def show(self) -> None:
         super().show()
@@ -82,6 +86,9 @@ class Flower(Plant):
             print(f" {self._name} is blooming beautifully!")
         else:
             print(f" {self._name} has not bloomed yet")
+
+    def display_stats(self) -> None:
+        display_stats(self)
 
 
 class Seed(Flower):
@@ -105,6 +112,9 @@ class Seed(Flower):
         self.seeds += 42
         self.age()
         self.grow(1.5)
+
+    def display_stats(self) -> None:
+        display_stats(self)
     
 
 class Tree(Plant):
@@ -159,6 +169,9 @@ class Vegetable(Plant):
         print(f" Harvest season: {self.harvest_season}")
         print(f" Nutritional value: {round(self.total_nutrition)}")
 
+    def display_stats(self) -> None:
+        display_stats(self)
+
 
 if __name__ == "__main__":
     print("=== Garden statistics ===")
@@ -169,9 +182,11 @@ if __name__ == "__main__":
     print("\n=== Flower")
     rose = Flower("Rose",  15, 10, "red")
     rose.show()
+    rose.display_stats()
     rose.bloom()
     rose.show()
-    
+    rose.display_stats()
+
     print("\n=== Tree")
     oak = Tree("Oak", 200, 365, 30)
     oak.show()
@@ -184,9 +199,10 @@ if __name__ == "__main__":
     sunflower.show()
     sunflower.bloom()
     sunflower.show()
-    display_stats(sunflower)
+    sunflower.display_stats()
 
     print("\n=== Anonymous")
     p1 = Plant.create_anonymous_plant()
     p1.show()
+    p1.display_stats()
     
