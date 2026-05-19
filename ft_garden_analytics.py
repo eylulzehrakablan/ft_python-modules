@@ -6,6 +6,7 @@ class Plant:
             self._grow_calls: int = 0
             self._age_calls: int = 0
             self._show_calls: int = 0
+            self._shade_calls: int = 0
 
         def count_grow(self) -> None:
             self._grow_calls += 1
@@ -15,6 +16,9 @@ class Plant:
 
         def count_show(self) -> None:
             self._show_calls += 1
+        
+        def count_shade(self) -> None:
+            self._shade_calls += 1
 
         def display(self) -> None:
             print(f"Stats: {self._grow_calls} grow, {self._age_calls} age, {self._show_calls} show")
@@ -111,15 +115,22 @@ class Tree(Plant):
     ) -> None:
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
+        self.is_shading = False
 
     def produce_shade(self) -> None:
+        self.is_shading = True
+        self._stats.count_shade()
         print(f"[asking the {(self._name).lower()} to produce shade]")
-        print(f"Tree {self._name} now produces a shade of {self._height:.1f}")
-        print(f"cm long and {self.trunk_diameter:.1f}cm wide")
+        print(f"Tree {self._name} now produces a shade of {self._height:.1f}", end="")
+        print(f"cm long and {self.trunk_diameter:.1f}cm wide.")
 
     def show(self) -> None:
         super().show()
         print(f" Trunk diameter: {self.trunk_diameter:.1f}cm")
+
+    def display_stats(self):
+        super().display_stats()
+        print(f" {self._stats._shade_calls} shade")
 
 
 class Vegetable(Plant):
@@ -158,15 +169,14 @@ if __name__ == "__main__":
     rose.show()
     rose.bloom()
     rose.show()
+    
     print("\n=== Tree")
     oak = Tree("Oak", 200, 365, 30)
     oak.show()
+    oak.display_stats()
     oak.produce_shade()
-    print("\n=== Vegetable")
-    tomato = Vegetable("Tomato", 5, 10, "April", 0.5)
-    tomato.show()
-    tomato.grow(1, 20)
-    tomato.show()
+    oak.display_stats()
+    
     print("\n=== Seed")
     sunflower = Seed("Sunflower", 80, 45, "yellow")
     sunflower.show()
@@ -178,3 +188,5 @@ if __name__ == "__main__":
     p1 = Plant.create_anonymous_plant()
     p1.show()
     p1.display_stats()
+
+    
