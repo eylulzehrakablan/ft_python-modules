@@ -11,6 +11,7 @@ def input_temperature(temp_str: str) -> int | None:
         print("Caught an error")
         return None
 
+
 def test_temperature(user_input: str) -> None:
     try:
         print(f"\nInput data is '{user_input}'")
