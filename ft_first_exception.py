@@ -4,9 +4,11 @@ def input_temperature(temp_str: str) -> int:
     try:
         return int(temp_str)
     except ValueError:
-        print(f"Caught input_temperature error: invalid literal for int() with base 10: '{temp_str}'")
+        print("Caught input_temperature error: ", end="")
+        print(f"invalid literal for int() with base 10: '{temp_str}'")
     except Exception:
         print("Caught an error")
+
 
 def test_temperature(user_input):
     try:
@@ -16,13 +18,14 @@ def test_temperature(user_input):
             print(f"Temperature is now {user_input}°C")
         elif (x == 0):
             print(f"Temperature is now {user_input}°C")
-    
     except NameError:
         print("Caught name error: function name couldn't be found")
     except TypeError:
-        print("Caught type error: function missing 1 required positional argument(s)")
+        print("Caught type error: function ", end="")
+        print("missing required positional argument(s)")
     except Exception:
         print("Caught an error")
+
 
 if __name__ == "__main__":
     print("=== Garden Temperature ===")
