@@ -19,29 +19,28 @@ def input_temperature(temp_str: str) -> int | None:
         return None
 
 
-def test_temperature(user_input: str) -> None:
-    try:
-        print(f"\nInput data is '{user_input}'")
-        x = input_temperature(user_input)
-        if (x):
-            print(f"Temperature is now {user_input}°C")
-        elif (x == 0):
-            print(f"Temperature is now {user_input}°C")
-    except Exception as e:
-        print(e)
-    except NameError:
-        print("Caught name error: function name couldn't be found")
-    except TypeError:
-        print("Caught type error: function ", end="")
-        print("missing required positional argument(s)")
+def test_temperature() -> None:
+    test_cases = ["25", "abc", "0", "-50", "100"]
+
+    for case in test_cases:
+        try:
+            print(f"\nInput data is '{case}'")
+            x = input_temperature(case)
+            if (x):
+                print(f"Temperature is now {case}°C")
+            elif (x == 0):
+                print(f"Temperature is now {case}°C")
+        except Exception as e:
+            print(e)
+        except NameError:
+            print("Caught name error: function name couldn't be found")
+        except TypeError:
+            print("Caught type error: function ", end="")
+            print("missing required positional argument(s)")
+
+    print("\nAll tests completed - program didn't crash!")
 
 
 if __name__ == "__main__":
     print("=== Garden Temperature ===")
-    test_temperature("25")
-    test_temperature("abc")
-    test_temperature("0")
-    test_temperature("-50")
-    test_temperature("100")
-
-    print("\nAll tests completed - program didn't crash!")
+    test_temperature()
