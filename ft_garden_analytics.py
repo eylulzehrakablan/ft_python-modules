@@ -30,9 +30,10 @@ class Plant:
     def create_anonymous_plant(cls) -> "Plant":
         return cls("Unknown plant", 0, 0)
 
-    def grow(self, growth: float) -> None:
-        self._height += growth
-        self._stats._grow_calls += 1
+    def grow(self, growth: float, days: int) -> None:
+        for day in range(1, days + 1):
+            self._height += growth
+            self._stats._grow_calls += 1
 
     def age(self) -> None:
         self._age_in_days += 1
@@ -67,7 +68,7 @@ class Flower(Plant):
     def bloom(self) -> None:
         print(f"[asking the {(self._name).lower()} to grow and bloom]")
         self.is_blooming = True
-        self.grow(1)
+        self.grow(1, 20)
 
     def show(self) -> None:
         super().show()
@@ -101,7 +102,7 @@ class Seed(Flower):
         self.is_blooming = True
         self.seeds += 42
         self.age()
-        self.grow(1.5)
+        self.grow(1.5, 20)
 
     def display_stats(self) -> None:
         display_stats(self)
@@ -151,7 +152,7 @@ class Vegetable(Plant):
         self.total_nutrition: float = 0
 
     def grow(self, growth: float, days: int) -> None:
-        super().grow(growth)
+        super().grow(growth, days)
         for day in range(1, days + 1):
             self.total_nutrition += self.nutritional_value
 
