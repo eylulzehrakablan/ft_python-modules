@@ -8,20 +8,9 @@ class Plant:
             self._show_calls: int = 0
             self._shade_calls: int = 0
 
-        def count_grow(self) -> None:
-            self._grow_calls += 1
-
-        def count_age(self) -> None:
-            self._age_calls += 1
-
-        def count_show(self) -> None:
-            self._show_calls += 1
-
-        def count_shade(self) -> None:
-            self._shade_calls += 1
-
         def display(self) -> None:
-            print(f"Stats: {self._grow_calls} grow, {self._age_calls} age, {self._show_calls} show")
+            print(f"Stats: {self._grow_calls} grow, ", end="")
+            print(f"{self._age_calls} age, {self._show_calls} show")
 
     def __init__(self, name: str, height: float, age: int) -> None:
         self._name = name
@@ -38,21 +27,22 @@ class Plant:
             print("-> False")
 
     @classmethod
-    def create_anonymous_plant(cls):
+    def create_anonymous_plant(cls) -> "Plant":
         return cls("Unknown plant", 0, 0)
 
     def grow(self, growth: float) -> None:
         self._height += growth
-        self._stats.count_grow()
+        self._stats._grow_calls += 1
 
     def age(self) -> None:
         self._age_in_days += 1
-        self._stats.count_age()    
+        self._stats._age_calls += 1
 
     def show(self) -> None:
-        print(f"{self._name}: {self._height:.1f}cm, {self._age_in_days} days old")
-        self._stats.count_show()
-    
+        print(f"{self._name}: ", end="")
+        print(f"{self._height:.1f}cm, {self._age_in_days} days old")
+        self._stats._show_calls += 1
+
     def display_stats(self) -> None:
         display_stats(self)
 
@@ -101,7 +91,7 @@ class Seed(Flower):
     ) -> None:
         super().__init__(name, height, age, color)
         self.seeds: int = 0
-    
+
     def show(self) -> None:
         super().show()
         print(f" Seeds: {self.seeds}")
@@ -115,7 +105,7 @@ class Seed(Flower):
 
     def display_stats(self) -> None:
         display_stats(self)
-    
+
 
 class Tree(Plant):
     def __init__(
@@ -131,9 +121,10 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         self.is_shading = True
-        self._stats.count_shade()
+        self._stats._shade_calls += 1
         print(f"[asking the {(self._name).lower()} to produce shade]")
-        print(f"Tree {self._name} now produces a shade of {self._height:.1f}", end="")
+        print(f"Tree {self._name} now produces a shade of ", end="")
+        print(f"{self._height:.1f}", end="")
         print(f"cm long and {self.trunk_diameter:.1f}cm wide.")
 
     def show(self) -> None:
@@ -193,7 +184,7 @@ if __name__ == "__main__":
     oak.display_stats()
     oak.produce_shade()
     oak.display_stats()
-    
+
     print("\n=== Seed")
     sunflower = Seed("Sunflower", 80, 45, "yellow")
     sunflower.show()
@@ -205,4 +196,3 @@ if __name__ == "__main__":
     p1 = Plant.create_anonymous_plant()
     p1.show()
     p1.display_stats()
-    
