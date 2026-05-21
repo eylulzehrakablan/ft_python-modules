@@ -6,13 +6,17 @@ def input_temperature(temp_str: str) -> int | None:
         if temp >= 0 and temp <= 40:
             return temp
         elif temp < 0:
-            raise Exception(f"Caught input_temperature error: {temp}°C is too cold for plants (min 0°C)")
+            message1 = f"Caught input_temperature error: {temp}"
+            message2 = "°C is too cold for plants (min 0°C)"
+            raise Exception(message1 + message2)
         else:
-            raise Exception(f"Caught input_temperature error: {temp}°C is too hot for plants (max 40°C)")
+            message1 = f"Caught input_temperature error: {temp}"
+            message2 = "°C is too hot for plants (max 40°C)"
+            raise Exception(message1 + message2)
     except ValueError:
         print("Caught input_temperature error: ", end="")
         print(f"invalid literal for int() with base 10: '{temp_str}'")
-        return None    
+        return None
 
 
 def test_temperature(user_input: str) -> None:
