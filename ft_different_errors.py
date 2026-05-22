@@ -29,6 +29,6 @@ def garden_operations(operation_number: int) -> None:
 if __name__ == "__main__":
     print("=== Garden Error Types Demo ===")
     for operation_number in range(0, 5):
-        print()
         print(f"Testing operation {operation_number}...")
         garden_operations(operation_number)
+    print("\nAll error types tested successfully!")
