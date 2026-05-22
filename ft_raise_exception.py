@@ -6,21 +6,16 @@ def input_temperature(temp_str: str) -> int | None:
         if temp >= 0 and temp <= 40:
             return temp
         elif temp < 0:
-            message1 = f"Caught input_temperature error: {temp}"
-            message2 = "°C is too cold for plants (min 0°C)"
-            raise Exception(message1 + message2)
+            raise Exception(f"{temp}°C is too cold for plants (min 0°C)")
         else:
-            message1 = f"Caught input_temperature error: {temp}"
-            message2 = "°C is too hot for plants (max 40°C)"
-            raise Exception(message1 + message2)
-    except ValueError:
-        print("Caught input_temperature error: ", end="")
-        print(f"invalid literal for int() with base 10: '{temp_str}'")
+            raise Exception(f"{temp}°C is too hot for plants (max 40°C)")
+    except ValueError as e:
+        print(f"Caught input_temperature error: {e}")
         return None
 
 
 def test_temperature() -> None:
-    test_cases = ["25", "abc", "0", "-50", "100"]
+    test_cases = ["25", "abc", "100", "-50"]
 
     for case in test_cases:
         try:
@@ -30,14 +25,12 @@ def test_temperature() -> None:
                 print(f"Temperature is now {case}°C")
             elif (x == 0):
                 print(f"Temperature is now {case}°C")
+        except NameError as e:
+            print(f"Caught NameError: {e}")
+        except TypeError as e:
+            print(f"Caught TypeError: function {e}")
         except Exception as e:
-            print(e)
-        except NameError:
-            print("Caught name error: function name couldn't be found")
-        except TypeError:
-            print("Caught type error: function ", end="")
-            print("missing required positional argument(s)")
-
+            print(f"Caught input_temperature error: {e}")
     print("\nAll tests completed - program didn't crash!")
 
 
