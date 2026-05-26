@@ -18,10 +18,11 @@ def water_plant(plant_name: str) -> None:
         raise PlantError(f"Invalid plant name to water: '{plant_name}'")
 
 
-plants = ["tomato", "lettuce", "carrots"]
+invalid_plants = ["tomato", "lettuce", "carrots"]
+valid_plants = [plant.capitalize() for plant in invalid_plants]
 
 
-def test_watering_system(message, plants) -> None:
+def test_watering_system(message: str, plants: list[str]) -> None:
     print(message)
 
     try:
@@ -38,6 +39,6 @@ def test_watering_system(message, plants) -> None:
 
 if __name__ == "__main__":
     print("=== Garden Watering System ===\n")
-    test_watering_system("Testing valid plants...", [plant.capitalize() for plant in plants])
-    test_watering_system("Testing invalid plants...", plants)
+    test_watering_system("Testing valid plants...", valid_plants)
+    test_watering_system("Testing invalid plants...", invalid_plants)
     print("Cleanup always happens, even with errors!")
