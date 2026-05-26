@@ -8,7 +8,7 @@ def garden_operations(operation_number: int) -> None:
         case 1:
             42 / 0
         case 2:               
-            open("example.txt")
+            open("/non/existent/file")
         case 3:
             "abc" + 42
         case 4:
@@ -17,7 +17,7 @@ def garden_operations(operation_number: int) -> None:
 
 def test_error_types():
     for operation_number in range(5):
-        print(f"Testing operation {operation_number}")
+        print(f"Testing operation {operation_number}...")
         try:
             garden_operations(operation_number)
         except ValueError as e:
