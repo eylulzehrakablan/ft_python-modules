@@ -19,8 +19,7 @@ if __name__ == "__main__":
     players = ["Alice", "Bob", "Charlie", "Dylan"]
     distinct_achievements_sets = []
 
-    i = 0
-    for player in players:
+    for i, player in enumerate(players):
         player_achievements = gen_players_achievements()
         distinct_achievements_sets.append(player_achievements)
         print(f"Player {player}: {player_achievements}\n")
@@ -32,8 +31,7 @@ if __name__ == "__main__":
     common_achievements = set(distinct_achievements_sets[0]).intersection(*distinct_achievements_sets[1:])
     print(f"Common achievements: {common_achievements}\n")
 
-    i = 0
-    for player in players:
+    for i, player in enumerate(players):
         other_players_union = set().union(
             *distinct_achievements_sets[:i],
             *distinct_achievements_sets[i+1:]
@@ -41,10 +39,7 @@ if __name__ == "__main__":
         only_player_has = set(distinct_achievements_sets[i]).difference(other_players_union)
         print(f"Only {player} has: {only_player_has}")
         i += 1
-    
     print()
-
-    i = 0
-    for player in players:
+    for i, player in enumerate(players):
         print(f"{player} is missing: {set(achievements) - distinct_achievements_sets[i]}")
         i += 1
