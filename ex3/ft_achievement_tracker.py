@@ -41,3 +41,10 @@ if __name__ == "__main__":
         only_player_has = set(distinct_achievements_sets[i]).difference(other_players_union)
         print(f"Only {player} has: {only_player_has}")
         i += 1
+    
+    print()
+
+    i = 0
+    for player in players:
+        print(f"{player} is missing: {set(achievements) - distinct_achievements_sets[i]}")
+        i += 1
