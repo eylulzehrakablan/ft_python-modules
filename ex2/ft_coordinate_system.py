@@ -16,11 +16,9 @@ def get_player_pos() -> tuple[float, float, float]:
             if len(splitted_input) != 3:
                 raise SyntaxError("Invalid syntax")
         
-            i = 0
             coordinates = [0, 0, 0]
-            for value in splitted_input:
-                coordinates[i] = splitted_input[i].strip()
-                i += 1
+            for i, value in enumerate(splitted_input):
+                coordinates[i] = value.strip()
 
             x = float(coordinates[0])
             y = float(coordinates[1])
