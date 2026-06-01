@@ -21,22 +21,15 @@ def print_scores(scores: list[int]) -> None:
     print(f"Score range: {max(scores) - min(scores)}")
 
 
-def contains_none(scores: list[int]) -> bool:
-    for score in scores:
-        if score is None:
-            return True
-    return False
-
-
 def ft_score_analytics() -> None:
     scores: list[str] = []
 
     for arg in sys.argv[1:]:
-        scores.append(arg)
+        value = py_atoi(arg)
+        if value is not None:
+            scores.append(value)
 
-    scores = [py_atoi(score) for score in scores]
-
-    if len(sys.argv) == 1 or contains_none(scores):
+    if len(sys.argv) == 1 or not scores:
         print("No scores provided. Usage: python3", end="")
         print(f"{sys.argv[0]} <score1> <score2> ...")
     else:
