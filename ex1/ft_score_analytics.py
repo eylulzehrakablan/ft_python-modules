@@ -22,7 +22,7 @@ def print_scores(scores: list[int]) -> None:
 
 
 def ft_score_analytics() -> None:
-    scores: list[str] = []
+    scores: list[int] = []
 
     for arg in sys.argv[1:]:
         value = py_atoi(arg)
