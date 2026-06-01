@@ -3,20 +3,23 @@
 import math
 
 
-def distance_between_points(t1: tuple, t2: tuple):
+def distance_between_points(
+        t1: tuple[float, float, float],
+        t2: tuple[float, float, float]) -> float:
     return math.sqrt((t1[0]-t2[0])**2 + (t1[1]-t2[1])**2 + (t1[2]-t2[2])**2)
 
 
 def get_player_pos() -> tuple[float, float, float]:
-    while(True):
-        user_input = input("Enter new coordinates as floats in format 'x,y,z': ")
+    while (True):
+        user_input = input("Enter new coordinates as floats "
+                           "in format 'x,y,z': ")
         try:
             splitted_input = user_input.split(',')
 
             if len(splitted_input) != 3:
                 raise SyntaxError("Invalid syntax")
-        
-            coordinates = [0, 0, 0]
+
+            coordinates = ["", "", ""]
             for i, value in enumerate(splitted_input):
                 coordinates[i] = value.strip()
 
@@ -38,8 +41,10 @@ if __name__ == "__main__":
     t1 = get_player_pos()
     print(f"Got a first tuple: {t1}")
     print(f"It includes: X={t1[0]}, Y={t1[1]}, Z={t1[2]}")
-    print(f"Distance to center: {round(distance_between_points(t1, (0.0, 0.0, 0.0)), 4)}")
+    print("Distance to center: "
+          f"{round(distance_between_points(t1, (0.0, 0.0, 0.0)), 4)}")
 
     print("\nGot a second set of coordinates")
     t2 = get_player_pos()
-    print(f"Distance between the 2 sets of coordinates: {round(distance_between_points(t1, t2) ,4)}")
+    print("Distance between the 2 sets of coordinates: "
+          f"{round(distance_between_points(t1, t2), 4)}")

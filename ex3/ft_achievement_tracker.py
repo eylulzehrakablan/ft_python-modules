@@ -3,14 +3,14 @@
 import random
 
 
-achievements = ("Untouchable", "Crafting Genius", "Strategist", "World Savior",
-                "Speed Runner", "Survivor", "Master Explorer", "Treasure Hunter",
-                "Unstoppable", "First Steps", "Collector Supreme", "Sharp Mind",
-                "Boss Slayer", "Hidden Path Finder")
+achievmnts = ("Untouchable", "Crafting Genius", "Strategist", "World Savior",
+              "Speed Runner", "Survivor", "Master Explorer", "Treasure Hunter",
+              "Unstoppable", "First Steps", "Collector Supreme", "Sharp Mind",
+              "Boss Slayer", "Hidden Path Finder")
 
 
 def gen_players_achievements() -> set[str]:
-    return set(random.sample(achievements, k=random.randint(1, len(achievements))))
+    return set(random.sample(achievmnts, k=random.randint(1, len(achievmnts))))
 
 
 if __name__ == "__main__":
@@ -28,7 +28,9 @@ if __name__ == "__main__":
     distinct_achievements = set().union(*distinct_achievements_sets)
     print(f"All distinct achievements: {distinct_achievements}\n")
 
-    common_achievements = set(distinct_achievements_sets[0]).intersection(*distinct_achievements_sets[1:])
+    common_achievements = set(
+        distinct_achievements_sets[0]).intersection(
+            *distinct_achievements_sets[1:])
     print(f"Common achievements: {common_achievements}\n")
 
     for i, player in enumerate(players):
@@ -36,10 +38,12 @@ if __name__ == "__main__":
             *distinct_achievements_sets[:i],
             *distinct_achievements_sets[i+1:]
         )
-        only_player_has = set(distinct_achievements_sets[i]).difference(other_players_union)
+        only_player_has = set(
+            distinct_achievements_sets[i]).difference(other_players_union)
         print(f"Only {player} has: {only_player_has}")
         i += 1
     print()
     for i, player in enumerate(players):
-        print(f"{player} is missing: {set(achievements) - distinct_achievements_sets[i]}")
+        print(f"{player} is missing: "
+              f"{set(achievmnts) - distinct_achievements_sets[i]}")
         i += 1
