@@ -12,13 +12,14 @@ def ft_inventory_system() -> None:
             if ":" not in arg:
                 raise ValueError(f"Error - invalid parameter '{arg}'")
 
-            item, quantity = arg.split(":")
+            item, raw_quantity = arg.split(":")
+            quantity = int(raw_quantity)
 
             if item in inventory:
                 print(f"Reduntant item '{item}' - discarding")
                 continue
 
-            inventory[item] = int(quantity)
+            inventory[item] = quantity
         except ValueError as e:
             print(e)
         except Exception as e:
