@@ -31,25 +31,3 @@ if __name__ == "__main__":
     for plant in plants:
         print("Created: ", end="")
         plant.show()
-
-    # for day in range(1, 8):
-    #     for plant in plants:
-    #         match plant.name:
-    #             case "Rose":
-    #                 plant.grow(0.1)
-    #             case "Oak":
-    #                 plant.grow(1.5)
-    #             case "Cactus":
-    #                 plant.grow(1.2)
-    #             case "Sunflower":
-    #                 plant.grow(0.8)
-    #             case "Fern":
-    #                 plant.grow(0.2)
-    #             case _:
-    #                 print("No match")
-    #     print(f"\n= Day {day} =")
-    #     for plant in plants:
-    #         plant.show()
-    # print("\n=== After Growth ===")
-    # for plant in plants:
-    #     plant.show()

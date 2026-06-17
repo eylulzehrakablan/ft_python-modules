@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-plant = "Rose"
+name = "Rose"
 height = 25
 age = 30
 
 
 def ft_garden_intro() -> None:
     print("=== Welcome to My Garden ===")
-    print(f"Plant: {plant}\nHeight: {height}cm\nAge: {age} days\n")
+    print(f"Plant: {name}\nHeight: {height}cm\nAge: {age} days\n")
     print("=== End of Program ===")
 
 
