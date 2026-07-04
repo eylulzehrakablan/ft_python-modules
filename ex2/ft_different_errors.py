@@ -2,24 +2,24 @@
 
 def garden_operations(operation_number: int) -> None:
     match operation_number:
-        case 0:               
-            input_value = "abc"
-            int(input_value)
+        case 0:
+            int("abc")
         case 1:
-            42 / 0
-        case 2:               
+            1 / 0
+        case 2:
             open("/non/existent/file")
         case 3:
-            "abc" + 42
-        case 4:
-            42 + 42
+            "1" + 1
+        case _:
+            return None
 
 
-def test_error_types():
-    for operation_number in range(5):
-        print(f"Testing operation {operation_number}...")
+def test_error_types() -> None:
+    operation_numbers = [0, 1, 2, 3, 4]
+    for number in operation_numbers:
+        print(f"Testing operation {number}...")
         try:
-            garden_operations(operation_number)
+            garden_operations(number)
         except ValueError as e:
             print(f"Caught ValueError: {e}")
         except ZeroDivisionError as e:
@@ -31,8 +31,9 @@ def test_error_types():
         else:
             print("Operation completed successfully")
 
+    print("\nAll error types tested successfully!")
+
 
 if __name__ == "__main__":
     print("=== Garden Error Types Demo ===")
     test_error_types()
-print("\nAll error types tested successfully!")
