@@ -15,7 +15,7 @@ def print_scores(scores: list[int]) -> None:
     print(f"Scores processed: {scores}")
     print(f"Total players: {len(sys.argv) - 1}")
     print(f"Total score: {sum(scores)}")
-    print(f"Average score: {sum(scores) / (len(sys.argv) - 1)}")
+    print(f"Average score: {(sum(scores) / (len(sys.argv) - 1)):.1f}")
     print(f"High score: {max(scores)}")
     print(f"Low score: {min(scores)}")
     print(f"Score range: {max(scores) - min(scores)}")
