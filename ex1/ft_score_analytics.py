@@ -27,7 +27,7 @@ def ft_score_analytics() -> None:
     for arg in sys.argv[1:]:
         value = py_atoi(arg)
         if value is not None:
-            scores.append(value)
+            scores = scores + [value]
 
     if len(sys.argv) == 1 or not scores:
         print("No scores provided. Usage: python3", end="")
