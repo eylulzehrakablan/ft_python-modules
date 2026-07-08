@@ -26,13 +26,19 @@ def print_scores(scores: list[int]) -> None:
 def ft_score_analytics() -> None:
     scores: list[int] = []
 
-    for arg in sys.argv[1:]:
-        value = py_atoi(arg)
-        if value is not None:
-            scores = scores + [value]
+    try:
+        _ = sys.argv[1]
 
-    if len(sys.argv) == 1 or not scores:
-        print("No scores provided. Usage: python3", end="")
+        for arg in sys.argv[1:]:
+            value = py_atoi(arg)
+            if value is not None:
+                scores = scores + [value]
+
+        if len(scores) == 0:
+            raise ZeroDivisionError
+
+    except (IndexError, ZeroDivisionError):
+        print("No scores provided. Usage: python3 ", end="")
         print(f"{sys.argv[0]} <score1> <score2> ...")
     else:
         print_scores(scores)
