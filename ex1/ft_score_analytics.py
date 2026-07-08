@@ -12,10 +12,12 @@ def py_atoi(tmp_str: str) -> int | None:
 
 
 def print_scores(scores: list[int]) -> None:
+    total_players = len(scores)
+
     print(f"Scores processed: {scores}")
-    print(f"Total players: {len(sys.argv) - 1}")
+    print(f"Total players: {total_players}")
     print(f"Total score: {sum(scores)}")
-    print(f"Average score: {(sum(scores) / (len(sys.argv) - 1)):.1f}")
+    print(f"Average score: {(sum(scores) / total_players):.1f}")
     print(f"High score: {max(scores)}")
     print(f"Low score: {min(scores)}")
     print(f"Score range: {max(scores) - min(scores)}")
