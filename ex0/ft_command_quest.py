@@ -10,7 +10,7 @@ def ft_command_quest() -> None:
         _ = sys.argv[1]
 
         print(f"Arguments received: {len(sys.argv) - 1}")
-        i: int = 1
+        i = 1
         for arg in sys.argv[1:]:
             print(f"Argument {i}: {arg}")
             i += 1
