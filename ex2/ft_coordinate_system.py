@@ -10,33 +10,30 @@ def distance_between_points(
 
 
 def get_player_pos() -> tuple[float, float, float]:
-    while (True):
+    while True:
         user_input = input("Enter new coordinates as floats "
                            "in format 'x,y,z': ")
+
+        splitted_input = user_input.split(',')
         try:
-            splitted_input = user_input.split(',')
+            _, _, _ = splitted_input
+        except ValueError:
+            print("Invalid syntax")
+            continue
 
-            if len(splitted_input) != 3:
-                raise SyntaxError("Invalid syntax")
-
-            coordinates = ["", "", ""]
-            for i, value in enumerate(splitted_input):
-                coordinates[i] = value.strip()
-
-            x = float(coordinates[0])
-            y = float(coordinates[1])
-            z = float(coordinates[2])
-
-            return (x, y, z)
-        except ValueError as e:
-            print(f"Error on parameter {e}")
-        except SyntaxError as e:
-            print(e)
+        coordinates: tuple[float, ...] = ()
+        for value in splitted_input:
+            clean_input = value.strip()
+            try:
+                coordinates = coordinates + (float(clean_input),)
+            except ValueError as e:
+                print(f"Error on parameter '{clean_input}': {e}")
+                break
+        else:
+            return (coordinates[0], coordinates[1], coordinates[2])
 
 
-if __name__ == "__main__":
-    print("=== Game Coordinate System ===\n")
-
+def ft_coordinate_system() -> None:
     print("Get a first set of coordinates")
     t1 = get_player_pos()
     print(f"Got a first tuple: {t1}")
@@ -44,7 +41,12 @@ if __name__ == "__main__":
     print("Distance to center: "
           f"{round(distance_between_points(t1, (0.0, 0.0, 0.0)), 4)}")
 
-    print("\nGot a second set of coordinates")
+    print("\nGet a second set of coordinates")
     t2 = get_player_pos()
     print("Distance between the 2 sets of coordinates: "
           f"{round(distance_between_points(t1, t2), 4)}")
+
+
+if __name__ == "__main__":
+    print("=== Game Coordinate System ===\n")
+    ft_coordinate_system()
