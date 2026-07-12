@@ -1,5 +1,3 @@
-#! /usr/bin/python3
-
 def create_earth() -> str:
     return "Earth element created"
 
