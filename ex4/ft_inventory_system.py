@@ -4,49 +4,51 @@ import sys
 
 
 def ft_inventory_system() -> None:
-    inventory: dict[str, int] = {}
+    inventory = {}
 
     for arg in sys.argv[1:]:
 
-        try:
-            if ":" not in arg:
-                raise ValueError(f"Error - invalid parameter '{arg}'")
+        if ":" not in arg:
+            print(f"Error - invalid parameter '{arg}'")
+            continue
 
-            item, raw_quantity = arg.split(":")
+        item, raw_quantity = arg.split(":")
+
+        try:
             quantity = int(raw_quantity)
 
             if item in inventory:
-                print(f"Reduntant item '{item}' - discarding")
+                print(f"Redundant item '{item}' - discarding")
                 continue
 
             inventory[item] = quantity
         except ValueError as e:
-            print(e)
-        except Exception as e:
             print(f"Quantity error for '{item}': {e}")
 
-    item_list = list(inventory.keys())
-    total_quantity = sum(inventory.values())
-
     print(f"Got inventory: {inventory}")
-    print(f"Item list: {item_list}")
-    print(f"Total quantity of the {len(item_list)} items: {total_quantity}")
+    key_list = list(inventory.keys())
+    print(f"Item list: {key_list}")
+    total_quantity = sum(inventory.values())
+    print(f"Total quantity of the {len(key_list)} items: {total_quantity}")
 
-    for item, quantity in inventory.items():
-        percenage = round((quantity / total_quantity) * 100, 1)
-        print(f"Item {item} represenets {percenage}%")
+    if len(key_list) > 0:
+        for item in inventory.keys():
+            quantity = inventory[item]
+            percentage = round((quantity / total_quantity) * 100, 1)
+            print(f"Item {item} represents {percentage}%")
 
-    highest_quantity = max(inventory.values())
-    for item, quantity in inventory.items():
-        if quantity == highest_quantity:
-            print(f"Item most abundant: {item} with quantity {quantity}")
-            break
+        most_abundant_item = key_list[0]
+        least_abundant_item = key_list[0]
+        for item in key_list:
+            if inventory[item] > inventory[most_abundant_item]:
+                most_abundant_item = item
+            if inventory[item] < inventory[least_abundant_item]:
+                least_abundant_item = item
 
-    lowest_quantity = min(inventory.values())
-    for item, quantity in inventory.items():
-        if quantity == lowest_quantity:
-            print(f"Item least abundant: {item} with quantity {quantity}")
-            break
+        print(f"Item most abundant: {most_abundant_item} "
+              f"with quantity {inventory[most_abundant_item]}")
+        print(f"Item least abundant: {least_abundant_item} "
+              f"with quantity {inventory[least_abundant_item]}")
 
     inventory.update({"magic_item": 1})
     print(f"Updated inventory: {inventory}")
