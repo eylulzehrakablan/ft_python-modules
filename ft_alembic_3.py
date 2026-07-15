@@ -1,3 +1,8 @@
 from alchemy.elements import create_air
 
-print(create_air())
+
+if __name__ == "__main__":
+    print("=== Alembic 3 ===")
+    print("Accessing alchemy/elements.py using 'import ...' structure")
+    print(f"Testing create_air: {create_air()}")
+    # print(f"Testing create_earth: {create_earth()}")
