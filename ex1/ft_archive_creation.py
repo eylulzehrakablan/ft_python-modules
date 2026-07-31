@@ -3,48 +3,60 @@
 import sys
 
 
-def ft_ancient_text() -> None:
-    try:
-        print(f"Accessing file '{sys.argv[1]}'")
-        f = open(f"{sys.argv[1]}", "r")
-        print("---\n")
-        print(f.read())
-        print("---")
-        f.close()
-        print(f"File '{sys.argv[1]}' closed")
-    except Exception as e:
-        print(f"Error opening a file '{sys.argv[1]}': {e}")
-
-
-def ft_archive_creation(new_content: str = "") -> None:
+def ft_archive_creation() -> None:
     if not len(sys.argv) == 2:
         print("Usage: ft_archive_creation.py <file>")
-    else:
-        ft_ancient_text()
+        return
 
-        f = open(f"{sys.argv[1]}", "r")
-        lines = f.readlines()
-        f.close()
+    file_path = sys.argv[1]
 
-        for line in lines:
-            new_line = line[:-1]
-            new_content += new_line + "#\n"
+    try:
+        print("=== Cyber Archives Recovery & Preservation ===")
+        print(f"Accessing file '{file_path}'")
 
-        print("\nTransform data:\n---\n")
-        print(new_content)
+        f = open(file_path, "r")
         print("---\n")
+        content = f.read()
+        print(content, end="")
+        if len(content) > 0 and not content[-1] == '\n':
+            print()
+        print("\n---")
+        f.close()
+        print(f"File '{file_path}' closed.")
+    except (FileNotFoundError, PermissionError, IsADirectoryError) as e:
+        print(f"Error opening file '{sys.argv[1]}': {e}")
+        return
 
-        user_input = input("Enter new file name (or empty): ")
-        if not user_input == "":
+    new_content = ""
+    for char in content:
+        if char == '\n':
+            new_content += "#\n"
+        else:
+            new_content += char
+
+    if len(content) > 0 and not content[-1] == '\n':
+        new_content += "#"
+
+    print("\nTransform data:\n---\n")
+    print(new_content, end="")
+    if len(new_content) > 0 and not new_content[-1] == '\n':
+        print()
+    print("\n---")
+
+    user_input = input("Enter new file name (or empty): ")
+    if not user_input == "":
+        try:
             f = open(user_input, "w")
             f.write(new_content)
             f.close()
             print(f"Saving data to '{user_input}'")
             print(f"Data saved in file '{user_input}'.")
-        else:
-            print("Not saving data.")
+        except (PermissionError, IsADirectoryError) as e:
+            print(f"Error opening file '{sys.argv[1]}': {e}")
+            return
+    else:
+        print("Not saving data.")
 
 
 if __name__ == "__main__":
-    print("=== Cyber Archives Recovery & Preservation ===")
     ft_archive_creation()
