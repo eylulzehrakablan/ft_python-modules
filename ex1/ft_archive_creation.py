@@ -24,7 +24,7 @@ def ft_archive_creation() -> None:
         f.close()
         print(f"File '{file_path}' closed.")
     except (FileNotFoundError, PermissionError, IsADirectoryError) as e:
-        print(f"Error opening file '{sys.argv[1]}': {e}")
+        print(f"Error opening file '{file_path}': {e}")
         return
 
     new_content = ""

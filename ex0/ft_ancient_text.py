@@ -21,7 +21,7 @@ def ft_ancient_text() -> None:
         f.close()
         print(f"File '{file_path}' closed")
     except (FileNotFoundError, PermissionError) as e:
-        print(f"Error opening file '{sys.argv[1]}': {e}")
+        print(f"Error opening file '{file_path}': {e}")
 
 
 if __name__ == "__main__":
