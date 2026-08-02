@@ -5,7 +5,7 @@ import sys
 
 def ft_ancient_text() -> None:
     if not len(sys.argv) == 2:
-        print("Usage: ft_ancient_fragment.py <file>")
+        print("Usage: ft_ancient_text.py <file>")
         return
 
     file_path = sys.argv[1]
