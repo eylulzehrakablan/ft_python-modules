@@ -52,7 +52,7 @@ def ft_archive_creation() -> None:
             print(f"Saving data to '{user_input}'")
             print(f"Data saved in file '{user_input}'.")
         except (PermissionError, IsADirectoryError) as e:
-            print(f"Error opening file '{sys.argv[1]}': {e}")
+            print(f"Error opening file '{user_input}': {e}")
             return
     else:
         print("Not saving data.")
