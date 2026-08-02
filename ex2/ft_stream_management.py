@@ -64,7 +64,7 @@ def ft_stream_management() -> None:
             print(f"Saving data to '{user_input}'")
             print(f"Data saved in file '{user_input}'.")
         except (PermissionError, IsADirectoryError) as e:
-            sys.stderr.write(f"[STDERR] Error opening file '{file_path}': {e}")
+            sys.stderr.write(f"[STDERR] Error opening file '{user_input}': {e}")
             sys.stderr.flush()
             sys.stdout.write("\n")
             print("Data not saved.")
