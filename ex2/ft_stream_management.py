@@ -23,8 +23,14 @@ def ft_stream_management() -> None:
         print("\n---")
         f.close()
         print(f"File '{file_path}' closed.")
-    except (FileNotFoundError, PermissionError, IsADirectoryError, OSError) as e:
-        print(f"[STDERR] Error opening file '{file_path}': {e}", file=sys.stderr)
+    except (
+        FileNotFoundError,
+        PermissionError,
+        IsADirectoryError,
+        OSError
+    ) as e:
+        print(f"[STDERR] Error opening file '{file_path}': {e}",
+              file=sys.stderr)
         return
 
     new_content = ""
@@ -42,7 +48,7 @@ def ft_stream_management() -> None:
     if len(new_content) > 0 and not new_content[-1] == '\n':
         print()
     print("\n---")
-   
+
     sys.stdout.write("Enter new file name (or empty): ")
     sys.stdout.flush()
     raw_user_input = sys.stdin.readline()
@@ -59,7 +65,8 @@ def ft_stream_management() -> None:
             print(f"Saving data to '{user_input}'")
             print(f"Data saved in file '{user_input}'.")
         except (PermissionError, IsADirectoryError) as e:
-            print(f"[STDERR] Error opening file '{user_input}': {e}", file=sys.stderr)
+            print(f"[STDERR] Error opening file '{user_input}': {e}",
+                  file=sys.stderr)
             print("Data not saved.")
             return
     else:
