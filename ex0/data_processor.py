@@ -105,8 +105,8 @@ if __name__ == "__main__":
 
     print("Testing Numeric Processor...")
     n_proc = NumericProcessor()
-    print(f" Tring to validate input '42': {n_proc.validate(42)}")
-    print(f" Tring to validate input 'Hello': {n_proc.validate('Hello')}")
+    print(f" Trying to validate input '42': {n_proc.validate(42)}")
+    print(f" Trying to validate input 'Hello': {n_proc.validate('Hello')}")
 
     print(" Test invalid ingestion of string 'foo' without prior validation:")
     try:
@@ -124,8 +124,8 @@ if __name__ == "__main__":
 
     print("\nTesting Text Processor...")
     t_proc = TextProcessor()
-    print(f" Tring to validate input '42': {t_proc.validate(42)}")
-    print(f" Tring to validate input 'Hello': {t_proc.validate('Hello')}")
+    print(f" Trying to validate input '42': {t_proc.validate(42)}")
+    print(f" Trying to validate input 'Hello': {t_proc.validate('Hello')}")
     t_list = ["Hello", "Nexus", "World"]
     t_proc.ingest(t_list)
     print(f" Processing data: {t_list}")
@@ -135,9 +135,9 @@ if __name__ == "__main__":
 
     print("\nTesting Log Processor...")
     l_proc = LogProcessor()
-    print(f" Tring to validate input 'Hello': {l_proc.validate('Hello')}")
+    print(f" Trying to validate input 'Hello': {l_proc.validate('Hello')}")
     logs = [
-        {"log_level": "NOTICE", "log_message": "Conntection to server"},
+        {"log_level": "NOTICE", "log_message": "Connection to server"},
         {"log_level": "ERROR", "log_message": "Unauthorized access!!"},
     ]
     l_proc.ingest(logs)
