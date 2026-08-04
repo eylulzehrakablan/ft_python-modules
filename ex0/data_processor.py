@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import typing
 
 
 class DataProcessor(ABC):
@@ -7,11 +8,11 @@ class DataProcessor(ABC):
         self._total_processed: int = 0
 
     @abstractmethod
-    def validate(self, data: any) -> bool:
+    def validate(self, data: typing.Any) -> bool:
         pass
 
     @abstractmethod
-    def ingest(self, data: any) -> None:
+    def ingest(self, data: typing.Any) -> None:
         pass
 
     def output(self) -> tuple[int, str]:
@@ -21,7 +22,7 @@ class DataProcessor(ABC):
 
 
 class NumericProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
+    def validate(self, data: typing.Any) -> bool:
         if isinstance(data, (int, float)):
             return True
         if isinstance(data, list):
@@ -40,8 +41,9 @@ class NumericProcessor(DataProcessor):
             self._storage.append((self._total_processed, str(data)))
             self._total_processed += 1
 
+
 class TextProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
+    def validate(self, data: typing.Any) -> bool:
         if isinstance(data, (str)):
             return True
         if isinstance(data, list):
@@ -62,8 +64,8 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
-        def is_valid_dict(d) -> bool:
+    def validate(self, data: typing.Any) -> bool:
+        def is_valid_dict(d: typing.Any) -> bool:
             return (
                 isinstance(d, dict) and
                 all(
@@ -85,6 +87,7 @@ class LogProcessor(DataProcessor):
         def format_log(log_dict: dict[str, str]) -> str:
             if "log_level" in log_dict and "log_message" in log_dict:
                 return f"{log_dict['log_level']}: {log_dict['log_message']}"
+            return ": ".join(f"{k}: {v}" for k, v in log_dict.items())
 
         if isinstance(data, list):
             for item in data:
@@ -92,6 +95,7 @@ class LogProcessor(DataProcessor):
                 self._storage.append((self._total_processed, formatted))
                 self._total_processed += 1
         else:
+            formatted = format_log(data)
             self._storage.append((self._total_processed, formatted))
             self._total_processed += 1
 
@@ -104,13 +108,13 @@ if __name__ == "__main__":
     print(f" Tring to validate input '42': {n_proc.validate(42)}")
     print(f" Tring to validate input 'Hello': {n_proc.validate('Hello')}")
 
-    print(f" Test invalid ingestion of string 'foo' without prior validation:")
+    print(" Test invalid ingestion of string 'foo' without prior validation:")
     try:
         n_proc.ingest("foo")
     except ValueError as e:
         print(f" Got exception: {e}")
 
-    n_list = [1, 2, 3, 4, 5]
+    n_list: list[int | float] = [1, 2, 3, 4, 5]
     n_proc.ingest(n_list)
     print(f" Processing data: {n_list}")
     print(" Extracting 3 values...")
