@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class DataProcessor(ABC):
+    def __init__(self) -> None:
+        self._storage: list[tuple[int, str]] = []
+        self._total_processed: int = 0
 
     @abstractmethod
     def validate(self, data: any) -> bool:
@@ -12,7 +15,9 @@ class DataProcessor(ABC):
         pass
 
     def output(self) -> tuple[int, str]:
-        pass
+        if not self._storage:
+            raise ValueError("No data left in the processor.")
+        return self._storage.pop(0)
 
 
 class NumericProcessor(DataProcessor):
@@ -29,10 +34,11 @@ class NumericProcessor(DataProcessor):
 
         if isinstance(data, list):
             for item in data:
-                pass
+                self._storage.append((self._total_processed, str(item)))
+                self._total_processed += 1
         else:
-            pass
-
+            self._storage.append((self._total_processed, str(data)))
+            self._total_processed += 1
 
 class TextProcessor(DataProcessor):
     def validate(self, data: any) -> bool:
@@ -48,9 +54,11 @@ class TextProcessor(DataProcessor):
 
         if isinstance(data, list):
             for item in data:
-                pass
+                self._storage.append((self._total_processed, str(item)))
+                self._total_processed += 1
         else:
-            pass
+            self._storage.append((self._total_processed, str(data)))
+            self._total_processed += 1
 
 
 class LogProcessor(DataProcessor):
@@ -80,9 +88,12 @@ class LogProcessor(DataProcessor):
 
         if isinstance(data, list):
             for item in data:
-                pass
+                formatted = format_log(item)
+                self._storage.append((self._total_processed, formatted))
+                self._total_processed += 1
         else:
-            pass
+            self._storage.append((self._total_processed, formatted))
+            self._total_processed += 1
 
 
 if __name__ == "__main__":
@@ -103,7 +114,9 @@ if __name__ == "__main__":
     n_proc.ingest(n_list)
     print(f" Processing data: {n_list}")
     print(" Extracting 3 values...")
-    # for _ in range(3):
+    for _ in range(3):
+        order, value = n_proc.output()
+        print(f" Numeric value {order}: {value}")
 
     print("\nTesting Text Processor...")
     t_proc = TextProcessor()
@@ -112,7 +125,9 @@ if __name__ == "__main__":
     t_list = ["Hello", "Nexus", "World"]
     t_proc.ingest(t_list)
     print(f" Processing data: {t_list}")
-    # print("Extracting 1 value...")
+    print(" Extracting 1 value...")
+    order, value = t_proc.output()
+    print(f" Text value: {order} {value}")
 
     print("\nTesting Log Processor...")
     l_proc = LogProcessor()
@@ -124,4 +139,6 @@ if __name__ == "__main__":
     l_proc.ingest(logs)
     print(f" Processing data: {logs}")
     print(" Extracting 2 values...")
-    # for _ in range(2):
+    for _ in range(2):
+        order, value = l_proc.output()
+        print(f" Log entry {order}: {value}")
