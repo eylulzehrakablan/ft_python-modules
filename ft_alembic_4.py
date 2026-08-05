@@ -9,7 +9,4 @@ if __name__ == "__main__":
     print("Now show that not all functions can be reached")
     print("This will raise an exception!")
     print("Testing the hiddden create_earth: ", end="")
-    try:
-        print(f"{alchemy.create_earth()}")
-    except AttributeError as e:
-        print(f"\n ! AttributeError: {e}")
+    print(f"{alchemy.create_earth()}")
