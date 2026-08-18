@@ -131,7 +131,7 @@ if __name__ == "__main__":
     print(f" Processing data: {t_list}")
     print(" Extracting 1 value...")
     order, value = t_proc.output()
-    print(f" Text value: {order} {value}")
+    print(f" Text value {order}: {value}")
 
     print("\nTesting Log Processor...")
     l_proc = LogProcessor()
@@ -143,6 +143,6 @@ if __name__ == "__main__":
     l_proc.ingest(logs)
     print(f" Processing data: {logs}")
     print(" Extracting 2 values...")
-    for _ in range(2):
+    for _ in range(l_proc._total_processed):
         order, value = l_proc.output()
         print(f" Log entry {order}: {value}")
