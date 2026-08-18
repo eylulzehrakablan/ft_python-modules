@@ -143,6 +143,6 @@ if __name__ == "__main__":
     l_proc.ingest(logs)
     print(f" Processing data: {logs}")
     print(" Extracting 2 values...")
-    for _ in range(l_proc._total_processed):
+    for _ in range(2):
         order, value = l_proc.output()
         print(f" Log entry {order}: {value}")
