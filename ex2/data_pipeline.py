@@ -173,7 +173,6 @@ class DataStream:
                 plugin.process_output(data_to_export)
 
 
-
 if __name__ == "__main__":
     print("=== Code Nexus - Data Pipeline ===\n")
 
@@ -240,62 +239,3 @@ if __name__ == "__main__":
     stream.output_pipeline(5, json_plugin)
 
     stream.print_processors_stats()
-
-
-
-
-# import typing
-
-# class Sender(typing.Protocol):
-#     def send(self, message: str) -> None:
-#         pass
-
-
-# class MailSystem:
-#     def send(self, message: str) -> None:
-#         print(f"Sending mail: {message}")
-
-
-# class SMSModule:
-#     def send(self, message: str) -> None:
-#         print(f"SMS Delivered: {message}")
-
-
-# class TrainedPigeon:
-#     def send(self, message: str) -> None:
-#         print(f"Pigeon deployed! Note attached: {message}")
-
-
-# class WalkieTalkie:
-#     def broadcast(self, message: str) -> None:
-#         print(f"Radio broadcast: {message} - OVER")
-
-#     # def send(self, message: str) -> None:
-#         # print(f"message: {message}")
-
-
-# def notify(device: Sender, message: str) -> None:
-#     device.send(message)
-
-
-# if __name__ == "__main__":
-#     print("=== Duck Typing Initiated ===\n")
-
-#     email = MailSystem()
-#     sms = SMSModule()
-
-#     pigeon = TrainedPigeon()
-
-#     notify(email, "system crashed")
-#     notify(sms, "server is rebooting")
-
-#     notify(pigeon, "the king approaches city!")
-
-
-#     print("--- Error testing ---")
-#     radio = WalkieTalkie()
-
-#     try:
-#         notify(radio, "do you copy?")
-#     except AttributeError as e:
-#         print(f"Error: {e}")
