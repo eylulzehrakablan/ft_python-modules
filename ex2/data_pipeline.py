@@ -115,10 +115,8 @@ class CsvPlugin:
 class JsonPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("JSON Output:")
-        json_output = "{"
-        for item in data:
-            json_output += f'"item_{item[0]}": "{item[1]}", '
-        json_output += "}"
+        items = [f'"item_{item[0]}": "{item[1]}"' for item in data]
+        json_output = "{" + ", ".join(items) + "}"
         print(json_output)
 
 
@@ -223,8 +221,14 @@ if __name__ == "__main__":
             'Stay healthy'
         ],
         [
-            {'log_level': 'ERROR', 'log_message': '500 server crash'},
-            {'log_level': 'NOTICE', 'log_message': 'Certificate expires in 10 days'}
+            {
+                'log_level': 'ERROR',
+                'log_message': '500 server crash'
+            },
+            {
+                'log_level': 'NOTICE',
+                'log_message': 'Certificate expires in 10 days'
+            }
         ],
         [32, 42, 64, 84, 128, 168],
         'World hello'
