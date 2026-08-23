@@ -17,7 +17,7 @@ class Creature(ABC):
 class Flameling(Creature):
     def __init__(self) -> None:
         super().__init__(name="Flameling", creature_type="Fire")
-        self.weapon = "Ember"
+        self.weapon: str = "Ember"
 
     def attack(self) -> str:
         return f"{self.name} uses {self.weapon}!"
@@ -26,7 +26,7 @@ class Flameling(Creature):
 class Pyrodon(Creature):
     def __init__(self) -> None:
         super().__init__(name="Pyrodon", creature_type="Fire/Flying")
-        self.weapon = "Flamethrower"
+        self.weapon: str = "Flamethrower"
 
     def attack(self) -> str:
         return f"{self.name} uses {self.weapon}!"
@@ -35,7 +35,7 @@ class Pyrodon(Creature):
 class Aquabub(Creature):
     def __init__(self) -> None:
         super().__init__(name="Aquabub", creature_type="Water")
-        self.weapon = "Water Gun"
+        self.weapon: str = "Water Gun"
 
     def attack(self) -> str:
         return f"{self.name} uses {self.weapon}!"
@@ -44,7 +44,7 @@ class Aquabub(Creature):
 class Torragon(Creature):
     def __init__(self) -> None:
         super().__init__(name="Torragon", creature_type="Water")
-        self.weapon = "Hydro Pump"
+        self.weapon: str = "Hydro Pump"
 
     def attack(self) -> str:
         return f"{self.name} uses {self.weapon}!"
