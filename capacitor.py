@@ -1,4 +1,5 @@
 import ex1
+import typing
 
 
 def test_healing(factory: ex1.HealingCreatureFactory) -> None:
@@ -9,12 +10,14 @@ def test_healing(factory: ex1.HealingCreatureFactory) -> None:
     print(" base:")
     print(base.describe())
     print(base.attack())
-    print(base.heal())
+    print(typing.cast(ex1.HealCapability, base).heal())
+    # print(base.heal())
 
     print(" evolved:")
     print(evolved.describe())
     print(evolved.attack())
-    print(evolved.heal(), end="\n\n")
+    print(typing.cast(ex1.HealCapability, evolved).heal(), end="\n\n")
+    # print(evolved.heal(), end="\n\n")
 
 
 def test_transforming(factory: ex1.TransformCreatureFactory) -> None:
@@ -25,16 +28,20 @@ def test_transforming(factory: ex1.TransformCreatureFactory) -> None:
     print(" base:")
     print(base.describe())
     print(base.attack())
-    print(base.transform())
+    print(typing.cast(ex1.TransformCapability, base).transform())
+    # print(base.transform())
     print(base.attack())
-    print(base.revert())
+    print(typing.cast(ex1.TransformCapability, base).revert())
+    # print(base.revert())
 
     print(" evolved:")
     print(evolved.describe())
     print(evolved.attack())
-    print(evolved.transform())
+    print(typing.cast(ex1.TransformCapability, evolved).transform())
+    # print(evolved.transform())
     print(evolved.attack())
-    print(evolved.revert())
+    print(typing.cast(ex1.TransformCapability, evolved).revert())
+    # print(evolved.revert())
 
 
 if __name__ == "__main__":
