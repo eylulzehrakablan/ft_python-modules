@@ -3,7 +3,9 @@ import ex1
 import ex2
 
 
-def battle(opponents: list[tuple[ex0.CreatureFactory, ex2.BattleStrategy]]) -> None:
+def battle(
+        opponents: list[tuple[ex0.CreatureFactory, ex2.BattleStrategy]]
+) -> None:
     print("*** Tournament ***")
     print(f"{len(opponents)} opponents involved")
 
@@ -26,7 +28,7 @@ def battle(opponents: list[tuple[ex0.CreatureFactory, ex2.BattleStrategy]]) -> N
                 strategy2.act(creature2)
             except ex2.InvalidStrategyError as e:
                 print(f"Battle error, aborting tournament: {e}")
-
+                return
 
 
 if __name__ == "__main__":
@@ -52,4 +54,12 @@ if __name__ == "__main__":
     battle([
         (flame_factory, aggressive),
         (healing_factory, defensive)
+    ])
+
+    print("\nTournament 2 (multiple)")
+    print("[ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]")
+    battle([
+        (aqua_factory, normal),
+        (healing_factory, defensive),
+        (transform_factory, aggressive)
     ])
