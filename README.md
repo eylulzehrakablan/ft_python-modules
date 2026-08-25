@@ -39,15 +39,14 @@ if one parent drops the token before the other parent gets its turn to set up it
 TranscenderCreature -> Creature (Creature class doesn't have a super() the chain breaks here) -> TransformCapability -> ABC -> object
 
 
-
 # Static Type Checking and identity
-## 42 Campus Analogy ======
+## 42 Campus Analogy 
 
-to understand how static analyzers think, imagine walking to the security desk at the 42 campus. to enter the cluster, you must be a *human* and an active *Cadet*.
+to understand how static analyzers think, imagine walking to the security desk at the 42 campus. to enter the cluster, you must be a **human** and an active **Cadet**.
 
 the security guard (selahattin abi a.k.a. the static analyzer) looks at you. you are clearly a human in real life (at runtime). however, you forgot your physical 42 Cadet ID card (the type annotation) at home. even thought the guard might know you, they cannot officially verify you as a cadet at that exact moment. the guard refuse you entry. the guard doesnt care about your actual physical abilities, he only care about the credentials you can present to them right now.
 
-===========================
+**===**
 
 Static analyzers do not execute our code. instead, they read the type annotations (the 'credentials') of a variable to determine what methods are legally available. 
 
