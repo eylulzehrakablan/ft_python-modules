@@ -5,7 +5,9 @@ import typing
 
 
 class InvalidStrategyError(Exception):
-    pass
+    def __init__(self, creature_name: str, strategy_name: str):
+        message = f"Invalid Creature '{creature_name}' for this {strategy_name} strategy"
+        super().__init__(message)
 
 
 class BattleStrategy(ABC):
@@ -24,7 +26,7 @@ class NormalStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> None:
         if not self.is_valid(creature):
-            raise InvalidStrategyError("NormalStrategy error")
+            raise InvalidStrategyError(creature.name, "normal")
         print(creature.attack())
 
 
@@ -34,18 +36,11 @@ class AggressiveStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> None:
         if not self.is_valid(creature):
-            raise InvalidStrategyError("AggressiveStrategy error")
+            raise InvalidStrategyError(creature.name, "aggressive")
         transformer = typing.cast(ex1.TransformCapability, creature)
         print(transformer.transform())
         print(creature.attack())
         print(transformer.revert())
-
-            # print("===")
-            # print(creature is transformer)
-            # print(transformer is creature)
-            # print(id(transformer))
-            # print(id(creature))
-            # print("===")
 
 
 class DefensiveStrategy(BattleStrategy):
@@ -54,14 +49,7 @@ class DefensiveStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> None:
         if not self.is_valid(creature):
-            raise InvalidStrategyError("DefensiveStrategy error")
+            raise InvalidStrategyError(creature.name, "defensive")
         healer = typing.cast(ex1.HealCapability, creature)
         print(creature.attack())
         print(healer.heal())
-
-            # print("===")
-            # print(creature is healer)
-            # print(healer is creature)
-            # print(id(healer))
-            # print(id(creature))
-            # print("===")

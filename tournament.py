@@ -15,14 +15,17 @@ def battle(opponents: list[tuple[ex0.CreatureFactory, ex2.BattleStrategy]]) -> N
             creature1 = factory1.create_base()
             creature2 = factory2.create_base()
 
-            print("* Battle *")
+            print("\n* Battle *")
             print(creature1.describe())
             print(" vs.")
             print(creature2.describe())
             print(" now fight!")
-            strategy1.act(creature1)
-            strategy2.act(creature2)
 
+            try:
+                strategy1.act(creature1)
+                strategy2.act(creature2)
+            except ex2.InvalidStrategyError as e:
+                print(f"Battle error, aborting tournament: {e}")
 
 
 
@@ -41,5 +44,12 @@ if __name__ == "__main__":
     print(" [ (Flaming+Normal), (Healing+Defensive) ]")
     battle([
         (flame_factory, normal),
+        (healing_factory, defensive)
+    ])
+
+    print("\nTournament 1 (error)")
+    print("[ (Flaming+Aggressive), (Healing+Defensive) ]")
+    battle([
+        (flame_factory, aggressive),
         (healing_factory, defensive)
     ])
