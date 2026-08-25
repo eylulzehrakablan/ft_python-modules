@@ -49,6 +49,7 @@ if __name__ == "__main__":
         (healing_factory, defensive)
     ])
 
+    print("=" * 50)
     print("\nTournament 1 (error)")
     print("[ (Flaming+Aggressive), (Healing+Defensive) ]")
     battle([
@@ -56,6 +57,7 @@ if __name__ == "__main__":
         (healing_factory, defensive)
     ])
 
+    print("=" * 50)
     print("\nTournament 2 (multiple)")
     print("[ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]")
     battle([
