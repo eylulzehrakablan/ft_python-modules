@@ -12,8 +12,8 @@ class HealingCreatureFactory(CreatureFactory):
 
 
 class TransformCreatureFactory(CreatureFactory):
-    def create_base(self):
+    def create_base(self) -> Creature:
         return Shiftling()
-    
-    def create_evolved(self):
+
+    def create_evolved(self) -> Creature:
         return Morphagon()

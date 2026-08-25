@@ -6,7 +6,7 @@ class Sproutling(Creature, HealCapability):
     def __init__(self) -> None:
         super().__init__(name="Sproutling", creature_type="Grass")
         self.weapon: str = "Vine Whip"
-    
+
     def attack(self) -> str:
         return f"{self.name} uses {self.weapon}!"
 
@@ -18,7 +18,7 @@ class Bloomelle(Creature, HealCapability):
     def __init__(self) -> None:
         super().__init__(name="Bloomelle", creature_type="Grass/Fairy")
         self.weapon: str = "Petal Dance"
-    
+
     def attack(self) -> str:
         return f"{self.name} uses {self.weapon}!"
 
@@ -47,7 +47,11 @@ class Shiftling(Creature, TransformCapability):
 
 class Morphagon(Creature, TransformCapability):
     def __init__(self) -> None:
-        Creature.__init__(self, name="Morphagon", creature_type="Normal/Dragon")
+        Creature.__init__(
+            self,
+            name="Morphagon",
+            creature_type="Normal/Dragon"
+        )
         TransformCapability.__init__(self)
 
     def attack(self) -> str:
