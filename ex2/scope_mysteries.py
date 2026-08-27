@@ -31,7 +31,9 @@ def spell_accumulator(initial_power: int) -> Callable:
 
 
 def enchantment_factory(enchantment_type: str) -> Callable:
-    pass
+    def enchant(item_name: str) -> str:
+        return f"{enchantment_type} {item_name}"
+    return enchant
 
 
 def memory_vault() -> dict[str, Callable]:
@@ -63,6 +65,12 @@ if __name__ == "__main__":
     # print(number)
     # number = accumulator2(3)
     # print(number)
+
+    print("\nTesting enchantment factory...")
+    flaming = enchantment_factory("Flaming")
+    frozen = enchantment_factory("Frozen")
+    print(flaming("Sword"))
+    print(frozen("Shield"))
 
 
 # def func1():
