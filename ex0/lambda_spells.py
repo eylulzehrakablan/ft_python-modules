@@ -1,11 +1,17 @@
-# """
+"""
 
-# sorted(iterable, key, reverse) -> list: creates a completely new sorted list.
-# filter(function, iterable) -> Filter object: evaluates each item through the function, only keeps items where the function evaluates to True
-# map(function, iterable) -> Map object: applies the provided function (is going to be a lambda in this example) to every single item in the iterable
+sorted(iterable, key, reverse) -> list:
+    creates a completely new sorted list.
+
+filter(function, iterable) -> Filter object:
+    evaluates each item through the function, only keeps items where the function evaluates to True
+
+map(function, iterable) -> Map object:
+    applies the provided function (is going to be a lambda in this example) to every single item in the iterable
 
 
-# """
+"""
+
 
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
     print("Testing artifact sorter...")
@@ -14,7 +20,8 @@ def artifact_sorter(artifacts: list[dict]) -> list[dict]:
 
 
 def power_filter(mages: list[dict], min_power: int) -> list[dict]:
-    pass
+    print("Testing power filter (min 75)...")
+    return list(filter(lambda mage: mage['power'] >= min_power, mages))
 
 
 def spell_transformer(spells: list[str]) -> list[str]:
@@ -41,11 +48,24 @@ if __name__ == "__main__":
         {'name': 'Crystal Orb', 'power': 100, 'type': 'weapon'}
     ]
 
+    mages = [
+        {'name': 'Kai', 'power': 80, 'element': 'earth'},
+        {'name': 'Zara', 'power': 95, 'element': 'lightning'},
+        {'name': 'Storm', 'power': 50, 'element': 'shadow'},
+        {'name': 'Phoenix', 'power': 73, 'element': 'water'}, 
+        {'name': 'Riley', 'power': 85, 'element': 'lightning'}, 
+        {'name': 'Nova', 'power': 85, 'element': 'water'}
+    ]
+
     sorted_artifacts = artifact_sorter(artifacts)
     if len(sorted_artifacts) >= 2:
         if len(sorted_artifacts) >= 2:
             print(f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']} power) "
                   f"comes before {sorted_artifacts[1]['name']} ({sorted_artifacts[1]['power']} power)")
+
+    filtered_mages = power_filter(mages, 75)
+    for mage in filtered_mages:
+        print(f"{mage['name']} - Power: {mage['power']}")
 
 
 # x = lambda a : a + 10
