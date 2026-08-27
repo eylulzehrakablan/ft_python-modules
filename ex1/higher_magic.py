@@ -40,9 +40,10 @@ def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     return conditional_spell
 
 
-
 def spell_sequence(spells: list[Callable]) -> Callable:
-    pass
+    def sequence_spell(target: str, power: int) -> list[str]:
+        return [spell(target, power) for spell in spells]
+    return sequence_spell
 
 
 if __name__ == "__main__":
@@ -53,8 +54,15 @@ if __name__ == "__main__":
     def heal(target: str, power: int) -> str:
         return f"Heal restores {target} for {power} HP."
 
+    def lightning(target: str, power: int) -> str:
+        return f"Lightning hits {target} for {power} damage!"
+
+    def tornado(target: str, power: int) -> str:
+        return f"Tornado hits {target} for {power} damage!"
+
+
     def is_powerful(target: str, power: str) -> bool:
-        return power >= 50
+        return power >= 78
 
     print("\nTesting spell combiner...")
     combined = spell_combiner(fireball, heal)
@@ -73,3 +81,9 @@ if __name__ == "__main__":
     print(conditional_attack('ekablan', 42))
     print(" Conditional Attack Attempt 2 (power 142):")
     print(conditional_attack('ekablan', 142))
+
+    print("\nTesting spell sequence...")
+    attack_combo = spell_sequence([fireball, lightning, tornado])
+    results = attack_combo("Zehra", 80)
+    for i, result in enumerate(results, 1):
+        print(f"Step {i}: {result}")
