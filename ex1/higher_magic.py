@@ -33,7 +33,12 @@ def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
 
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
-    pass
+    def conditional_spell(target: str, power: int) -> str:
+        if condition(target, power):
+            return spell(target, power)
+        return "Spell fizzled"
+    return conditional_spell
+
 
 
 def spell_sequence(spells: list[Callable]) -> Callable:
@@ -48,6 +53,8 @@ if __name__ == "__main__":
     def heal(target: str, power: int) -> str:
         return f"Heal restores {target} for {power} HP."
 
+    def is_powerful(target: str, power: str) -> bool:
+        return power >= 50
 
     print("\nTesting spell combiner...")
     combined = spell_combiner(fireball, heal)
@@ -59,3 +66,10 @@ if __name__ == "__main__":
     base_power = 10
     print(f"Original: {base_power}, Amplified: {base_power * 3}")
     print(f"Result: {fireball_rain('Dragon', base_power)}")
+
+    print("\nTesting conditional caster...")
+    conditional_attack = conditional_caster(is_powerful, fireball)
+    print(" Conditional Attack Attempt 1 (power 42):")
+    print(conditional_attack('ekablan', 42))
+    print(" Conditional Attack Attempt 2 (power 142):")
+    print(conditional_attack('ekablan', 142))
