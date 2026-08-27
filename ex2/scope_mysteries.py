@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from typing import Any
 
 # def mage_counter():
 #     count = 0
@@ -37,7 +38,18 @@ def enchantment_factory(enchantment_type: str) -> Callable:
 
 
 def memory_vault() -> dict[str, Callable]:
-    pass
+    vault: dict[str, Any] = {}
+
+    def store(key: str, value: Any) -> None:
+        vault[key] = value
+
+    def recall(key: str) -> Any:
+        return vault.get(key, "Memory not found")
+
+    return {
+        'store': store,
+        'recall': recall
+    }
 
 
 if __name__ == "__main__":
@@ -71,6 +83,19 @@ if __name__ == "__main__":
     frozen = enchantment_factory("Frozen")
     print(flaming("Sword"))
     print(frozen("Shield"))
+
+    print("\nTesting memory vault...")
+    vault = memory_vault()
+
+    print("Store 'secret' = 42")
+    vault['store']('secret', 42)
+
+    print("Store 'name' = zehra")
+    vault['store']('name', "zehra")
+    print(f"Recall 'secret': {vault['recall']('secret')}")
+    print(f"Recall 'unknown': {vault['recall']('unknown')}")
+    print(f"Recall 'name': {vault['recall']('name')}")
+
 
 
 # def func1():
