@@ -58,12 +58,10 @@ default (Optional): The fallback value returned if the provided iterable is comp
 
 
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
-    print("\nTesting artifact sorter...")
     return sorted(artifacts, key=lambda artifact: artifact['power'], reverse=True)
 
 
 def power_filter(mages: list[dict], min_power: int) -> list[dict]:
-    print("\nTesting power filter (min 78)...")
     return list(filter(lambda mage: mage['power'] >= min_power, mages))
 
 
@@ -76,12 +74,10 @@ def power_filter(mages: list[dict], min_power: int) -> list[dict]:
 
 
 def spell_transformer(spells: list[str]) -> list[str]:
-    print("\nTesting spell transformer...")
     return list(map(lambda spell: f"* {spell} *", spells))
 
 
 def mage_stats(mages: list[dict]) -> dict:
-    print("\nTesting mage stats...")
 
     max_power = max(mages, key=lambda mage: mage['power'])['power']
     min_power = min(mages, key=lambda mage: mage['power'])['power']
@@ -130,19 +126,23 @@ if __name__ == "__main__":
     #               f"comes before {sorted_artfcts[1]['name']} ({sorted_artfcts[1]['power']} power)")
     # print("=" * 40)
 
+    print("\nTesting artifact sorter...")
     sorted_artifacts = artifact_sorter(artifacts)
     if len(sorted_artifacts) >= 2:
         if len(sorted_artifacts) >= 2:
             print(f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']} power) "
                   f"comes before {sorted_artifacts[1]['name']} ({sorted_artifacts[1]['power']} power)")
 
+    print("\nTesting power filter (min 78)...")
     filtered_mages = power_filter(mages, 78)
     for mage in filtered_mages:
         print(f"{mage['name']} - Power: {mage['power']}")
 
+    print("\nTesting spell transformer...")
     transformed_spells = spell_transformer(spells)
     print(" ".join(transformed_spells))
 
+    print("\nTesting mage stats...")
     stats = mage_stats(mages)
     print(f"Stats: {stats}")
 
