@@ -61,7 +61,7 @@ if __name__ == "__main__":
         return f"Tornado hits {target} for {power} damage!"
 
 
-    def is_powerful(target: str, power: str) -> bool:
+    def is_powerful(target: str, power: int) -> bool:
         return power >= 78
 
     print("\nTesting spell combiner...")
