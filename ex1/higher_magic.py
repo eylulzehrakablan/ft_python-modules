@@ -27,7 +27,9 @@ def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
 
 
 def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
-    pass
+    def amplified_spell(target: str, power: int) -> str:
+        return base_spell(target, power * multiplier)
+    return amplified_spell
 
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
@@ -47,7 +49,13 @@ if __name__ == "__main__":
         return f"Heal restores {target} for {power} HP."
 
 
-    print("Testing spell combiner...")
+    print("\nTesting spell combiner...")
     combined = spell_combiner(fireball, heal)
     res1, res2 = combined("Dragon", 10)
     print(f"Combined spell result: {res1}, {res2}")
+
+    print("\nTesting power amplifier...")
+    fireball_rain = power_amplifier(fireball, 3)
+    base_power = 10
+    print(f"Original: {base_power}, Amplified: {base_power * 3}")
+    print(f"Result: {fireball_rain('Dragon', base_power)}")
