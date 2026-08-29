@@ -10,7 +10,7 @@ class Shiftling(Creature, TransformCapability):
 
 when we use super().__init__() with multiple inheritance, python creates a specific linear lookup chain and follows this path which is called called MRO.
 
-We can inspect this chain in python by running (at the root of the repository): print(creatures.Shiftling.__mro__)
+We can inspect this chain in python by running (at the root of the repository): `print(creatures.Shiftling.__mro__)`
 
 if parent classes don't also use super(), the chain breaks and the second parent's __init__ might be skipped.
 
