@@ -48,13 +48,18 @@ def retry_spell(max_attempts: int) -> Callable:
 
 
 class MageGuild:
-
     @staticmethod
     def validate_mage_name(name: str) -> bool:
-        pass
+        if not isinstance(name, str) or len(name) < 3:
+            return False
 
+        cleaned = name.replace(" ", "")
+        return len(cleaned) > 0 and cleaned.isalpha()
+
+    @power_validator(min_power=10)
     def cast_spell(self, spell_name: str, power: int) -> str:
-        pass
+        return f"Successfully cast {spell_name} with {power} power"
+
 
 if __name__ == "__main__":
     print("\nCasting spell timer...")
@@ -84,4 +89,9 @@ if __name__ == "__main__":
     print(failing_spell())
     print(orc_spell())
 
-    print("\nTesting")
+    print("\nTesting MageGuild...")
+    guild = MageGuild()
+    print(guild.validate_mage_name("Gandalf"))
+    print(guild.validate_mage_name("Jo"))
+    print(guild.cast_spell("Lightning", 15))
+    print(guild.cast_spell("Fireball", 5))
