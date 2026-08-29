@@ -48,7 +48,3 @@ class Torragon(Creature):
 
     def attack(self) -> str:
         return f"{self.name} uses {self.weapon}!"
-
-
-if __name__ == "__main__":
-    print("")
