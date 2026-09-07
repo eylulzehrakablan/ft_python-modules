@@ -17,7 +17,7 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     }
 
     if operation not in operations:
-        raise KeyError(f"Unknown operation: {operation}")
+        raise ValueError(f"Unknown operation: {operation}")
 
     return functools.reduce(operations[operation], spells)
 
@@ -33,7 +33,7 @@ def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
 @functools.lru_cache(maxsize=None)
 def memoized_fibonacci(n: int) -> int:
     if n < 0:
-        raise TypeError("n cannot be negative")
+        raise ValueError("n cannot be negative")
     if n == 0:
         return 0
     if n == 1:
