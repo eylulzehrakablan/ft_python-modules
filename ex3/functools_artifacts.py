@@ -2,14 +2,13 @@ from collections.abc import Callable
 from typing import Any
 import functools
 import operator
-from functools import lru_cache
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
     if not spells:
         return 0
-    
-    operations = {
+
+    operations: dict[str, Callable[[int, int], int]] = {
         "add": operator.add,
         "multiply": operator.mul,
         "max": max,
@@ -22,9 +21,15 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     return functools.reduce(operations[operation], spells)
 
 
-def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
+def partial_enchanter(
+    base_enchantment: Callable[..., str]
+) -> dict[str, Callable[..., str]]:
     return {
-        "sweeping_edge": functools.partial(base_enchantment, power=50, element="sweeping_edge"),
+        "sweeping_edge": functools.partial(
+            base_enchantment,
+            power=50,
+            element="sweeping_edge"
+        ),
         "flame": functools.partial(base_enchantment, power=50, element="fire"),
         "frost": functools.partial(base_enchantment, power=50, element="ice")
     }
@@ -39,40 +44,41 @@ def memoized_fibonacci(n: int) -> int:
     if n == 1:
         return 1
     return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
-    
+
 
 def spell_dispatcher() -> Callable[[Any], str]:
-       
+
     @functools.singledispatch
     def dispatcher(spell: Any) -> str:
         return "Unknown spell type"
-        
+
     @dispatcher.register(int)
-    def _(spell: int) -> str:
+    def _int(spell: int) -> str:
         return f"Damage spell: {spell} damage"
-        
+
     @dispatcher.register(str)
-    def _(spell: str) -> str:
+    def _str(spell: str) -> str:
         return f"Enchantment: {spell}"
-        
+
     @dispatcher.register(list)
-    def _(spell: list) -> str:
+    def _list(spell: list[Any]) -> str:
         return f"Multi-cast: {len(spell)} spells"
-        
+
     return dispatcher
 
 
 if __name__ == "__main__":
     print("\nTesting spell reducer...")
     spell_powers = [10, 20, 30, 40]
-    empty_spell_list = []
+    empty_spell_list: list[int] = []
     print(f"Sum: {spell_reducer(spell_powers, 'add')}")
     print(f"Product: {spell_reducer(spell_powers, 'multiply')}")
     print(f"Max: {spell_reducer(spell_powers, 'max')}")
     print(f"Min: {spell_reducer(spell_powers, 'min')}")
-    print(f"Min: {spell_reducer(empty_spell_list, 'min')}") # return 0
+    print(f"Min: {spell_reducer(empty_spell_list, 'min')}")
 
     print("\nTesting partial enchanter...")
+
     def enchanter(power: int, element: str, target: str) -> str:
         return f"item {target} enchanted with {element} of {power} power."
     enchanters = partial_enchanter(enchanter)

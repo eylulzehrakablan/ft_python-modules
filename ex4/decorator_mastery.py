@@ -4,8 +4,8 @@ from typing import Any
 import time
 
 
-def spell_timer(func: Callable) -> Callable:
-    @wraps(spell_timer)
+def spell_timer(func: Callable[..., Any]) -> Callable[..., Any]:
+    @wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         print(f"Casting {func.__name__}...")
         start_time = time.time()
@@ -15,8 +15,9 @@ def spell_timer(func: Callable) -> Callable:
         return result
     return wrapper
 
-def power_validator(min_power: int) -> Callable:
-    def decorator(func: Callable) -> Callable:
+
+def power_validator(min_power: int) -> Callable[..., Any]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             power_level = kwargs.get('power')
@@ -29,8 +30,8 @@ def power_validator(min_power: int) -> Callable:
     return decorator
 
 
-def retry_spell(max_attempts: int) -> Callable:
-    def decorator(func: Callable) -> Callable:
+def retry_spell(max_attempts: int) -> Callable[..., Any]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             for attempt in range(1, max_attempts + 1):
@@ -71,6 +72,7 @@ if __name__ == "__main__":
     print(F"Result: {fireball()}")
 
     print("\nTesting standalone power_validator...")
+
     @power_validator(min_power=50)
     def ultimate_attack(target: str, power: int) -> str:
         return f"Ultimate attack hit {target} with {power} power!"
@@ -80,9 +82,11 @@ if __name__ == "__main__":
     print(ultimate_attack("Dragon", power=10))
 
     print("\nTesting retrying spell...")
+
     @retry_spell(max_attempts=3)
     def failing_spell() -> str:
         raise ValueError("Boom!")
+
     @retry_spell(max_attempts=3)
     def orc_spell() -> str:
         return "Waaaaaaagh spelled !"
