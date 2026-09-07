@@ -1,46 +1,38 @@
-# test_values = [18, 20, 5]
-# test_targets = ['Dragon', 'Goblin', 'Wizard', 'Knight']
-
 from collections.abc import Callable
 
-# x = 42
-# def f():
-#     x = 5
-# res = callable(f)
-# print(res)
-# print(callable(x))
 
-# class Cadet:
-#     def __init__(self, name):
-#         self.name = name
-#     def __call__(self):
-#         print(f"hello, this is {self.name}")
-# print(callable(Cadet))
-# cadetObject = Cadet("Zehra")
-# cadetObject()
-
-
-def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
+def spell_combiner(
+    spell1: Callable[[str, int], str],
+    spell2: Callable[[str, int], str]
+) -> Callable[[str, int], tuple[str, str]]:
     def combined_spell(target: str, power: int) -> tuple[str, str]:
         return (spell1(target, power), spell2(target, power))
     return combined_spell
 
 
-def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
+def power_amplifier(
+    base_spell: Callable[[str, int], str],
+    multiplier: int
+) -> Callable[[str, int], str]:
     def amplified_spell(target: str, power: int) -> str:
         return base_spell(target, power * multiplier)
     return amplified_spell
 
 
-def conditional_caster(condition: Callable, spell: Callable) -> Callable:
+def conditional_caster(
+    condition: Callable[[int], bool],
+    spell: Callable[[str, int], str]
+) -> Callable[[str, int], str]:
     def conditional_spell(target: str, power: int) -> str:
-        if condition(target, power):
+        if condition(power):
             return spell(target, power)
         return "Spell fizzled"
     return conditional_spell
 
 
-def spell_sequence(spells: list[Callable]) -> Callable:
+def spell_sequence(
+    spells: list[Callable[[str, int], str]]
+) -> Callable[[str, int], list[str]]:
     def sequence_spell(target: str, power: int) -> list[str]:
         return [spell(target, power) for spell in spells]
     return sequence_spell
@@ -60,8 +52,7 @@ if __name__ == "__main__":
     def tornado(target: str, power: int) -> str:
         return f"Tornado hits {target} for {power} damage!"
 
-
-    def is_powerful(target: str, power: int) -> bool:
+    def is_powerful(power: int) -> bool:
         return power >= 78
 
     print("\nTesting spell combiner...")
