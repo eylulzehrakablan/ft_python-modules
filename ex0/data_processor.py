@@ -118,10 +118,12 @@ if __name__ == "__main__":
     n_proc.ingest(n_list)
     print(f" Processing data: {n_list}")
     print(" Extracting 3 values...")
-    for _ in range(3):
-        order, value = n_proc.output()
-        print(f" Numeric value {order}: {value}")
-
+    try:
+        for _ in range(3):
+            order, value = n_proc.output()
+            print(f" Numeric value {order}: {value}")
+    except ValueError as e:
+        print(e)
     print("\nTesting Text Processor...")
     t_proc = TextProcessor()
     print(f" Trying to validate input '42': {t_proc.validate(42)}")
@@ -130,9 +132,12 @@ if __name__ == "__main__":
     t_proc.ingest(t_list)
     print(f" Processing data: {t_list}")
     print(" Extracting 1 value...")
-    order, value = t_proc.output()
-    print(f" Text value {order}: {value}")
-
+    try:
+        for _ in range(1):
+            order, value = t_proc.output()
+            print(f" Text value {order}: {value}")
+    except ValueError as e:
+        print(e)
     print("\nTesting Log Processor...")
     l_proc = LogProcessor()
     print(f" Trying to validate input 'Hello': {l_proc.validate('Hello')}")
@@ -143,6 +148,9 @@ if __name__ == "__main__":
     l_proc.ingest(logs)
     print(f" Processing data: {logs}")
     print(" Extracting 2 values...")
-    for _ in range(2):
-        order, value = l_proc.output()
-        print(f" Log entry {order}: {value}")
+    try:
+        for _ in range(2):
+            order, value = l_proc.output()
+            print(f" Log entry {order}: {value}")
+    except ValueError as e:
+        print(e)
