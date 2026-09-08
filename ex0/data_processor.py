@@ -127,7 +127,6 @@ if __name__ == "__main__":
     print("\nTesting Text Processor...")
     t_proc = TextProcessor()
     print(f" Trying to validate input '42': {t_proc.validate(42)}")
-    print(f" Trying to validate input 'Hello': {t_proc.validate('Hello')}")
     t_list = ["Hello", "Nexus", "World"]
     t_proc.ingest(t_list)
     print(f" Processing data: {t_list}")
