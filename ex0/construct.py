@@ -3,8 +3,6 @@ import os
 import site
 
 if __name__ == "__main__":
-    # print(sys.prefix)
-    # print(sys.base_prefix)
     is_in_venv = sys.prefix != sys.base_prefix
 
     if is_in_venv:
