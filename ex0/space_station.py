@@ -25,7 +25,7 @@ if __name__ == "__main__":
             oxygen_level=92.3,
             last_maintenance=datetime.now(),
             is_operational=True,
-            notes="All systems normal"
+            notes=""
         )
         print("Valid station created:")
         print(f"ID: {valid_station.station_id}")
@@ -33,7 +33,8 @@ if __name__ == "__main__":
         print(f"Crew: {valid_station.crew_size} people")
         print(f"Power: {valid_station.power_level}%")
         print(f"Oxygen: {valid_station.oxygen_level}%")
-        print(f"Status: {'Operational' if valid_station.is_operational else 'Down'}\n")
+        print(f"Status: {'Operational' if valid_station.is_operational else 'Down'}")
+        print(f"Notes: {valid_station.notes}\n")
         print("=" * 40)
     
     except ValidationError as e:
@@ -50,4 +51,6 @@ if __name__ == "__main__":
         )
     except ValidationError as e:
         print("Expected validation error:")
-        print(e)
+        error_msg = e.errors()[0]["msg"]
+        clean_msg = error_msg.replace("Value error, ", "")
+        print(clean_msg)
