@@ -13,27 +13,41 @@ class SpaceStation(BaseModel):
     is_operational: bool = Field(default=True)
     notes: Optional[str] = Field(default=None, max_length=200)
 
-
 if __name__ == "__main__":
     print("Space Station Data Validation")
-    print("=" * 42)
+    print("=" * 40)
+    try:
+        valid_station = SpaceStation(
+            station_id="ISS001",
+            name="International Space Station",
+            crew_size=6,
+            power_level=85.5,
+            oxygen_level=92.3,
+            last_maintenance=datetime.now(),
+            is_operational=True,
+            notes="All systems normal"
+        )
+        print("Valid station created:")
+        print(f"ID: {valid_station.station_id}")
+        print(f"Name: {valid_station.name}")
+        print(f"Crew: {valid_station.crew_size} people")
+        print(f"Power: {valid_station.power_level}%")
+        print(f"Oxygen: {valid_station.oxygen_level}%")
+        print(f"Status: {'Operational' if valid_station.is_operational else 'Down'}\n")
+        print("=" * 40)
+    
+    except ValidationError as e:
+        print(f"Unexpected error: {e}")
 
-    valid_station = SpaceStation(
-        station_id="ISS001",
-        name="International Space Station",
-        crew_size=6,
-        power_level=85.5,
-        oxygen_level=92.3,
-        last_maintenance=datetime.now(),
-        is_operational=True,
-        notes="All systems normal"
-    )
-    print("Valid station created:")
-    print(f"ID: {valid_station.station_id}")
-    print(f"Name: {valid_station.name}")
-    print(f"Crew: {valid_station.crew_size} people")
-    print(f"Power: {valid_station.power_level}%")
-    print(f"Oxygen: {valid_station.oxygen_level}%")
-    print(f"Status: {'Operational' if valid_station.is_operational else 'Down'}\n")
-
-    print("=" * 42)
+    try:
+        invalid_station = SpaceStation(
+            station_id="ISS002",
+            name="Deep Space Nine",
+            crew_size=50,
+            power_level=105.0,
+            oxygen_level=90.0,
+            last_maintenance=datetime.now()
+        )
+    except ValidationError as e:
+        print("Expected validation error:")
+        print(e)
