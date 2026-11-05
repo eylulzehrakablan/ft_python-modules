@@ -23,6 +23,8 @@ if __name__ == "__main__":
     else:
         print("MATRIX STATUS: You're still plugged in\n")
         print(f"Current Python: {sys.executable}")
+        print("Package installation path:")
+        print(site.getsitepackages()[0])
         print("Virtual Environment: None detected\n")
         print("WARNING: You're in the global environment!")
         print("The machines can see everything you install.\n")
