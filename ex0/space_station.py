@@ -1,4 +1,3 @@
-# ex0/space_station.py
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, Field, ValidationError
