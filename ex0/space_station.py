@@ -26,8 +26,9 @@ if __name__ == "__main__":
             oxygen_level=92.3,
             last_maintenance=datetime.now(),
             is_operational=True,
-            notes=""
+            notes="System diagnostics required"
         )
+
         print("Valid station created:")
         print(f"ID: {valid_station.station_id}")
         print(f"Name: {valid_station.name}")
