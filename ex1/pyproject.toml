@@ -1,15 +1,14 @@
 [tool.poetry]
-name = "matrix-loading"
+name = "loading-programs"
 version = "0.1.0"
-description = "Matrix data loading"
-authors = ["Eylül Zehra Kablan <ekablan@42.tr>"]
-package-mode = false
+description = "Matrix Data Analysis Tool"
+authors = [{ name = "ekablan" }]
 
 [tool.poetry.dependencies]
-python = "^3.12"
-pandas = "3.1.1"
-numpy = "2.5.4"
-matplotlib = "3.11.2"
+python = "^3.10"
+pandas = "^2.1.0"
+numpy = "^1.25.0"
+matplotlib = "^3.7.2"
 
 [build-system]
 requires = ["poetry-core"]

@@ -54,7 +54,7 @@ def analyze_matrix(modules):
 
     plt.plot(df["Time"], df["Manipulated"], color="green", label="Simple Line (+50)")
 
-    plt.title("The Simplest Matrix Data")
+    plt.title("The Simpliest Matrix Data")
     plt.xlabel("Time")
     plt.ylabel("Value")
     plt.legend()
