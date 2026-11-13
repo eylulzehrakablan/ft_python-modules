@@ -1,0 +1,100 @@
+from collections.abc import Callable
+from typing import Any
+import functools
+import operator
+
+
+def spell_reducer(spells: list[int], operation: str) -> int:
+    if not spells:
+        return 0
+
+    operations: dict[str, Callable[[int, int], int]] = {
+        "add": operator.add,
+        "multiply": operator.mul,
+        "max": max,
+        "min": min
+    }
+
+    if operation not in operations:
+        raise ValueError(f"Unknown operation: {operation}")
+
+    return functools.reduce(operations[operation], spells)
+
+
+def partial_enchanter(
+    base_enchantment: Callable[..., str]
+) -> dict[str, Callable[..., str]]:
+    return {
+        "sweeping_edge": functools.partial(
+            base_enchantment,
+            power=50,
+            element="sweeping_edge"
+        ),
+        "flame": functools.partial(base_enchantment, power=50, element="fire"),
+        "frost": functools.partial(base_enchantment, power=50, element="ice")
+    }
+
+
+@functools.lru_cache(maxsize=None)
+def memoized_fibonacci(n: int) -> int:
+    if n < 0:
+        raise ValueError("n cannot be negative")
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
+
+
+def spell_dispatcher() -> Callable[[Any], str]:
+
+    @functools.singledispatch
+    def dispatcher(spell: Any) -> str:
+        return "Unknown spell type"
+
+    @dispatcher.register(int)
+    def _int(spell: int) -> str:
+        return f"Damage spell: {spell} damage"
+
+    @dispatcher.register(str)
+    def _str(spell: str) -> str:
+        return f"Enchantment: {spell}"
+
+    @dispatcher.register(list)
+    def _list(spell: list[Any]) -> str:
+        return f"Multi-cast: {len(spell)} spells"
+
+    return dispatcher
+
+
+if __name__ == "__main__":
+    print("\nTesting spell reducer...")
+    spell_powers = [10, 20, 30, 40]
+    empty_spell_list: list[int] = []
+    print(f"Sum: {spell_reducer(spell_powers, 'add')}")
+    print(f"Product: {spell_reducer(spell_powers, 'multiply')}")
+    print(f"Max: {spell_reducer(spell_powers, 'max')}")
+    print(f"Min: {spell_reducer(spell_powers, 'min')}")
+    print(f"Min: {spell_reducer(empty_spell_list, 'min')}")
+
+    print("\nTesting partial enchanter...")
+
+    def enchanter(power: int, element: str, target: str) -> str:
+        return f"item {target} enchanted with {element} of {power} power."
+    enchanters = partial_enchanter(enchanter)
+    print(enchanters["flame"](target="Sword"))
+    print(enchanters["frost"](target="Boots"))
+    print(enchanters["sweeping_edge"](target="Sword"))
+
+    print("\nTesting memoized fibonacci...")
+    print(f"Fib(0): {memoized_fibonacci(0)}")
+    print(f"Fib(1): {memoized_fibonacci(1)}")
+    print(f"Fib(10): {memoized_fibonacci(10)}")
+    print(f"Fib(15): {memoized_fibonacci(15)}")
+
+    print("\nTesting spell dispatcher...")
+    dispatch = spell_dispatcher()
+    print(dispatch(42))
+    print(dispatch("fireball"))
+    print(dispatch([1, 2, 3]))
+    print(dispatch(3.14))
